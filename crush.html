@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Someone Special ❤️</title>
+    
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            color: #4a4a4a;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #ffeef8 0%, #f8e8ff 50%, #e8f8ff 100%);
+            min-height: 100vh;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header/Landing */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.1)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%23ff9a9e"/><stop offset="100%" stop-color="%23fecfef"/></radialGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/></svg>');
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            color: #8b5cf6;
+            margin-bottom: 20px;
+            text-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: #6b7280;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        /* Navigation */
+        .nav-btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(255, 154, 158, 0.6);
+        }
+
+        /* Photo Gallery */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Music Section */
+        .music-section {
+            text-align: center;
+        }
+
+        .music-embed {
+            position: relative;
+            max-width: 560px;
+            margin: 30px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .music-embed iframe {
+            width: 100%;
+            height: 315px;
+            border: none;
+            border-radius: 20px;
+        }
+
+        .music-controls {
+            margin: 30px 0;
+        }
+
+        .music-btn {
+            background: linear-gradient(45deg, #a78bfa, #c4b5fd);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(167, 139, 250, 0.4);
+        }
+
+        .music-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(167, 139, 250, 0.6);
+        }
+
+        /* Message Section */
+        .message-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            background: rgba(255,255,255,0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Form */
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(255,255,255,0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #6b7280;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.8);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff9a9e;
+            box-shadow: 0 0 0 3px rgba(255, 154, 158, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 154, 158, 0.4);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 154, 158, 0.6);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Thank You Section */
+        .thank-you {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #8b5cf6;
+        }
+
+        .heart {
+            font-size: 3rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .hero h1 {
+                margin-bottom: 15px;
+            }
+            
+            .music-embed iframe {
+                height: 250px;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(45deg, #10b981, #34d399);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>For Someone Special ❤️</h1>
+            <p>Every moment with you feels like a beautiful dream that I never want to wake from.</p>
+            <a href="#gallery" class="nav-btn">Our Memories ↓</a>
+        </div>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section id="gallery">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #8b5cf6; margin-bottom: 20px;">Our Precious Memories</h2>
+            <div class="gallery">
+                <!-- Replace these with your own image URLs -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1516589178581-6cd7838b8f60?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Memory 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1576484168799-5dd6c39d2d84?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Memory 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Memory 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Memory 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Memory 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1524504388940-b6b749e7148d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Memory 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Music Section with YouTube Embed -->
+    <section id="music">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #8b5cf6; margin-bottom: 20px;">Our Song</h2>
+            <div class="music-section">
+                <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    "Sorry SHISTATA you aren't able to play this song due to some errors...
+                </p>
+                <div class="music-embed">
+                    <!-- YouTube Music Embed - Optimized for the requested song -->
+                    <iframe 
+                        src="https://music.youtube.com/embed/KrJ5c-Egz-U?autoplay=0&controls=1" 
+                        title="Our Song "
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <p style="font-style: italic; margin-top: 20px; color: #6b7280;">
+                    💕 Click play and let the memories flood back 💕
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Message -->
+    <section id="message">
+        <div class="container">
+            <div class="message-content">
+                <h2 style="color: #8b5cf6; font-size: 2.5rem; margin-bottom: 20px;">A Message From My Heart</h2>
+                <p>
+                    You are my sunshine on the cloudiest days, my safe haven in life's storms, 
+                    and the melody that plays endlessly in my heart. Every beat whispers your name.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guestbook Form -->
+    <section id="guestbook">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; color: #8b5cf6; margin-bottom: 20px;">Share Your Thoughts</h2>
+            <p style="text-align: center; margin-bottom: 40px; font-size: 1.1rem;">
+                I'd love to hear what this means to you ❤️ (optional)
+            </p>
+            <div class="form-container">
+                <div id="successMessage" class="success-message">
+                    Thank you for your sweet message! 💕 It means the world to me.
+                </div>
+                <form id="guestbookForm">
+                    <div class="form-group">
+                        <label for="name">Your Name (optional)</label>
+                        <input type="text" id="name" name="name" placeholder="Someone special...">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your Message</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Share your thoughts with us..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Love 💌</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thank You Section -->
+    <section class="thank-you" id="thankyou">
+        <div class="container">
+            <div class="heart">💖</div>
+            <h2>Made with endless love</h2>
+            <p>For the one who makes my world complete</p>
+        </div>
+    </section>
+
+    <script>
+        // EmailJS Configuration - Replace with your own credentials
+        // 1. Get your credentials from https://www.emailjs.com/
+        // 2. Replace SERVICE_ID, TEMPLATE_ID, and PUBLIC_KEY below
+        const SERVICE_ID = 'service_8cliyx7';
+        const TEMPLATE_ID = 'template_rbofkko';
+        const PUBLIC_KEY = 'chXTrE6sGyWhu2v0v';
+
+        // Initialize EmailJS
+        emailjs.init(PUBLIC_KEY);
+
+        // Stagger section animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Guestbook Form Submission
+        document.getElementById('guestbookForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value || 'Anonymous';
+            const message = document.getElementById('message').value;
+
+            const templateParams = {
+                from_name: name,
+                message: message,
+                to_name: 'Your Special Someone'
+            };
+
+            // Show loading state
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalText = submitBtn
